@@ -1,0 +1,103 @@
+<section class="content section-size">
+
+    <div class="row">
+        <div class="offset-1 col-6">
+
+            <div class="text-center m-t-50" *ngIf="persons.length == 0">
+                <div class="zmdi zmdi-quote m-t-20 not-found-quote">
+                </div>
+                <div class="not-found">No hay</div>
+                <div class="m-b-30 not-found">Personas agregadas</div>
+            </div>
+
+            <div class="card card-size" *ngIf="persons.length > 0">
+                <perfect-scrollbar>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Edad</th>
+                                <th>Sexo</th>
+                                <th>Lugar de nacimiento</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr *ngFor="let person of persons">
+                                <td (click)="showEditPersonModal(person.key)">{{ person.nombre }}</td>
+                                <td (click)="showEditPersonModal(person.key)">{{ person.apellido }}</td>
+                                <td (click)="showEditPersonModal(person.key)">{{ person.edad }}</td>
+                                <td (click)="showEditPersonModal(person.key)">{{ person.sexo == gender.MALE ? 'Masculino' : 'Femenino' }}</td>
+                                <td (click)="showEditPersonModal(person.key)">{{ person.lugarNacimiento }}</td>
+                                <td>
+                                    <i class="zmdi zmdi-close zmdi-hc-2x text-danger cursor-pointer"
+                                       (click)="removePerson(person.key)"></i>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </perfect-scrollbar>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header p-b-0 text-center">
+                    <h3>Añadir nueva persona</h3>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control form-control-line" formControlFloat
+                               [(ngModel)]="newPerson.nombre">
+                        <label>Nombre</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control form-control-line" formControlFloat
+                               [(ngModel)]="newPerson.apellido">
+                        <label>Apellido</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <input type="number" class="form-control form-control-line" formControlFloat
+                               [(ngModel)]="newPerson.edad">
+                        <label>Edad</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+
+                    <label class="form-check d-inline-block m-l-10">
+                        <input name="sex" type="radio" class="form-check-input" [value]="gender.MALE"
+                               [(ngModel)]="newPerson.sexo">
+                        <span>Masculino</span>
+                    </label>
+
+                    <label class="form-check d-inline-block m-l-10">
+                        <input name="sex" type="radio" class="form-check-input" [value]="gender.FEMALE"
+                               [(ngModel)]="newPerson.sexo">
+                        <span>Femenino</span>
+                    </label>
+
+                    <select class="form-control m-t-15" [(ngModel)]="newPerson.lugarNacimiento">
+                        <option selected value="">Lugar de nacimiento</option>
+                        <option value="Hermosillo">Hermosillo</option>
+                        <option value="Navojoa">Navojoa</option>
+                        <option value="Guaymas">Guaymas</option>
+                        <option value="Obregon">Obregon</option>
+                        <option value="Empalme">Empalme</option>
+                    </select>
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success btn-block" (click)="addPerson()">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<growl [showGrowl]="showGrowl" [title]="growlTitle"></growl>

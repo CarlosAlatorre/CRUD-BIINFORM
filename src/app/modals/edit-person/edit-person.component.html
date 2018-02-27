@@ -1,0 +1,59 @@
+<section>
+    <div class="card">
+        <div class="card-header p-b-0 text-center">
+            <div class="row">
+                <div class="col-10">
+                    <h3>Editar información de {{ person?.nombre + ' ' + person?.apellido }}</h3>
+                </div>
+                <div class="col-2">
+                    <i class="zmdi zmdi-close zmdi-hc-2x text-danger cursor-pointer" (click)="closeModal()"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-t-0">
+            <div class="form-group form-group--float">
+                <input type="text" class="form-control form-control-line" formControlFloat
+                       [(ngModel)]="person.nombre" #name>
+                <label>Nombre</label>
+                <i class="form-group__bar"></i>
+            </div>
+            <div class="form-group form-group--float">
+                <input type="text" class="form-control form-control-line" formControlFloat
+                       [(ngModel)]="person.apellido" #lastName>
+                <label>Apellido</label>
+                <i class="form-group__bar"></i>
+            </div>
+            <div class="form-group form-group--float">
+                <input type="number" class="form-control form-control-line" formControlFloat
+                       [(ngModel)]="person.edad" #age>
+                <label>Edad</label>
+                <i class="form-group__bar"></i>
+            </div>
+
+            <label class="form-check d-inline-block m-l-10">
+                <input name="editSex" type="radio" class="form-check-input" [value]="gender.MALE"
+                       [(ngModel)]="person.sexo">
+                <span>Masculino</span>
+            </label>
+
+            <label class="form-check d-inline-block m-l-10">
+                <input name="editSex" type="radio" class="form-check-input" [value]="gender.FEMALE"
+                       [(ngModel)]="person.sexo">
+                <span>Femenino</span>
+            </label>
+
+            <select class="form-control m-t-15" [(ngModel)]="person.lugarNacimiento">
+                <option selected value="">Lugar de nacimiento</option>
+                <option value="Hermosillo">Hermosillo</option>
+                <option value="Navojoa">Navojoa</option>
+                <option value="Guaymas">Guaymas</option>
+                <option value="Obregon">Obregon</option>
+                <option value="Empalme">Empalme</option>
+            </select>
+
+        </div>
+        <div class="card-footer p-b-0">
+            <button class="btn btn-primary btn-block" (click)="editPerson()">Editar</button>
+        </div>
+    </div>
+</section>
